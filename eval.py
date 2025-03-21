@@ -24,7 +24,7 @@ def main():
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default="ntnu-smil/LTTC-Dev-1964-0520",
+        default="ntnu-smil/LTTC-Train1964-0520",
         help="Dataset name to use for evaluation",
     )
     parser.add_argument(
@@ -40,7 +40,6 @@ def main():
     )
     parser.add_argument(
         "--max_samples",
-        default=90,
         type=int,
         help="Maximum number of evaluation samples",
     )
