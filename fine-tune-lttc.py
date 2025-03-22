@@ -1,247 +1,210 @@
 import argparse
-import json
 import os
 from pathlib import Path
+import json
 
 import torch
 from accelerate import Accelerator
-from datasets import load_dataset
-from torch.utils.data import Dataset
 from transformers import (
-    AutoModelForSequenceClassification,
-    AutoProcessor,
+    AutoModelForCausalLM,
     Trainer,
     TrainingArguments,
 )
-from peft import LoraConfig, get_peft_model
-from transformers import AutoModelForCausalLM, StoppingCriteria, StoppingCriteriaList
+from huggingface_hub import whoami, delete_file, upload_file
 
-import os
-import io
-from PIL import Image
-import soundfile as sf
-class MultipleTokenBatchStoppingCriteria(StoppingCriteria):
-    """Stopping criteria capable of receiving multiple stop-tokens and handling batched inputs."""
+from common import (
+    FinetuneDataset,
+    collate_fn,
+    evaluate,
+    load_model_and_processor,
+)
 
-    def __init__(self, stop_tokens: torch.LongTensor, batch_size: int = 1) -> None:
-        """Initialize the multiple token batch stopping criteria.
-        Args:
-            stop_tokens: Stop-tokens.
-            batch_size: Batch size.
-        """
-
-        self.stop_tokens = stop_tokens
-        self.max_stop_tokens = stop_tokens.shape[-1]
-        self.stop_tokens_idx = torch.zeros(batch_size, dtype=torch.long, device=stop_tokens.device)
-
-
-    def __call__(self, input_ids: torch.LongTensor, scores: torch.FloatTensor, **kwargs) -> bool:
-        # Only gather the maximum number of inputs compatible with stop tokens
-        # and checks whether generated inputs are equal to `stop_tokens`
-        generated_inputs = torch.eq(input_ids[:, -self.max_stop_tokens :].unsqueeze(1), self.stop_tokens)
-        equal_generated_inputs = torch.all(generated_inputs, dim=2)
-
-        # Mark the position where a stop token has been produced for each input in the batch,
-        # but only if the corresponding entry is not already set
-        sequence_idx = torch.any(equal_generated_inputs, dim=1)
-        sequence_set_mask = self.stop_tokens_idx == 0
-        self.stop_tokens_idx[sequence_idx & sequence_set_mask] = input_ids.shape[-1]
-
-        return torch.all(self.stop_tokens_idx)
-
-
-
-# Define prompt structure
-user_prompt = '<|user|>'
-assistant_prompt = '<|assistant|>'
-prompt_suffix = '<|end|>'
-ANSWER_SUFFIX = "<|end|><|endoftext|>"
-_IGNORE_INDEX = -100
-
-InstructionText = f"""
-{{
-    "role": "system", 
-    "content": "You are an English native speaker and a professional English speaking evaluator. Your task is to evaluate spoken English based on pronunciation, intonation, fluency, and the ability to communicate effectively. \
-Your grading should be neutral and objective, do NOT overly praise strengths. \
-Assign a score from 0 to 5 using the following criteria: "
-}},
-{{
-    "role": "system",
-    "content": "Score 5: Pronunciation and intonation are correct and natural. The speaker expresses themselves fluently, with no communication barriers. \
-Score 4: Pronunciation and intonation are mostly correct and natural. There are some errors, but they do not hinder understanding. The speaker expresses themselves fairly fluently without communication barriers. \
-Score 3: Pronunciation and intonation occasionally have errors but remain understandable. The speaking speed is slower, with occasional pauses, but communication is still achievable. \
-Score 2: Pronunciation and intonation frequently have errors, which affect the listener's understanding. The speaking speed is slow, with frequent pauses that impact the delivery. \
-Score 1: Pronunciation and intonation have numerous errors, with many inappropriate pauses, making it difficult for the listener to understand. \
-Score 0: No response or the response is equivalent to no response. \
-Please follow these guidelines when evaluating the score provided."
-}},
-{{
-    "role": "system",
-    "content": "I will provide 1. question 2. ASR text of students' answer and sub-scores from 3 parts: Language Use, Delivery, and Relevance predicted by other models, each of them ranging from 0 to 5. You should predict the final score based on the relevance of the question, sub-scores, and the text."
-}},
-{{
-    "role": "developer", 
-    "content": "Below are 3 sample judgments. You can refer to these samples when you predict scores later."
-}},
-{{
-    "role": "developer",
-    "content": "Question: Where was this picture probably taken? What makes you think so? What are some things to pay attention to when participating in activities in this kind of place? Which season do you think is suitable to visit this place? Why? If you still have time, please describe what people are wearing and other details of this picture."
-}},
-{{
-    "role": "developer",
-    "content": "1. all: 1.5 langUse: 2.5 delivery 3.5 content 2.5, text= This is the river because there is water a lot. Here be quiet river a lot to Summer because summer is very hot River is cool They are they they are very hot because they they were short and Yeah."
-}},
-{{
-    "role": "developer",
-    "content": "Question: Where was this picture probably taken? What makes you think so? What are some things to pay attention to when participating in activities in this kind of place? Which season do you think is suitable to visit this place? Why? If you still have time, please describe what people are wearing and other details of this picture."
-}},
-{{
-    "role": "developer",
-    "content": "2. all: 1.0 langUse: 0.5 delivery 0.5 relevance 0.5, text= I like the river because it's very warm. I don't know. I don't know. I don't know. I don't like to talk in my bed. I don't like... I don't like... I don't like... I don't like..."
-}},
-{{
-    "role": "developer",
-    "content": "Question: Where was this picture probably taken? What makes you think so? What are some things to pay attention to when participating in activities in this kind of place? Which season do you think is suitable to visit this place? Why? If you still have time, please describe what people are wearing and other details of this picture."
-}},
-{{
-    "role": "developer",
-    "content": "3. all: 5.0 langUse: 4.5 delivery 5.0 relevance 5.0, text= I think they might be at a national park because the national parks are usually in nature or outside. They might need to watch out for the river because the river might flow very fast and they might have to wear some hiking shoes because it is very dangerous if you wear slippers. I think it is better if you come here in summer because summer is usually very hot and rivers are usually very cool. You can enjoy it very much and you can cool off too. I see the people are wearing different clothes that have different varieties of colors. Someone is wearing striped t-shirt. Someone's wearing a white t-shirt. And I see two kids that are playing. And some people are standing in the river. And one person is sitting on a rock. And two are on the side."
-}},
-{{
-    "role": "user", 
-    "content": "You should only return the final score of the following input. The output should be a number between 0 and 5 with one decimal place. Without any other information or text, format: '3.0'"
-}},
-{{
-    "role": "user", 
-    "content": "Score according to the picture and the audio given to you"
-}}
-"""
-
-class LTTC_Dataset(Dataset):
-    def __init__(self, processor, dataset, split, instruction, training=True):
-        self.data = dataset[split]
-        self.processor = processor
-        self.instruction = instruction
-        self.training = training
-
-    def __len__(self):
-        return len(self.data)
-
-    def __getitem__(self, idx):
-        data = self.data[idx]
-        user_message = {
-            'role': 'user',
-            'content': '<|audio_1|>\n' + self.instruction,
-        }
-        prompt = self.processor.tokenizer.apply_chat_template(
-            [user_message], tokenize=False, add_generation_prompt=True
-        )
-        inputs = self.processor(
-            text=prompt,
-            audio, samplerate = sf.read(io.BytesIO(data["wav_path"]))
-            audios=[(audio, samplerate)]
-            return_tensors='pt',
-        )
-
-        answer = f"{data['grade']}{ANSWER_SUFFIX}"  # Use the "grade" column
-        answer_ids = self.processor.tokenizer(answer, return_tensors='pt').input_ids
-        if self.training:
-            input_ids = torch.cat([inputs.input_ids, answer_ids], dim=1)
-            labels = torch.full_like(input_ids, _IGNORE_INDEX)
-            labels[:, -answer_ids.shape[1]:] = answer_ids
-        else:
-            input_ids = inputs.input_ids
-            labels = answer_ids
-
-        return {
-            'input_ids': input_ids,
-            'labels': labels,
-            'input_audio_embeds': inputs.input_audio_embeds,
-            'audio_embed_sizes': inputs.audio_embed_sizes,
-        }
-
-@torch.no_grad()
-def evaluate(model, processor, eval_dataset, save_path=None, eval_batch_size=1):
-    model.eval()
-    all_generated_texts = []
-    all_labels = []
-
-    eval_dataloader = torch.utils.data.DataLoader(
-        eval_dataset,
-        batch_size=eval_batch_size,
-        collate_fn=lambda x: x[0],  # Simplified collate function
-        shuffle=False,
-    )
-
-    for inputs in eval_dataloader:
-        inputs = {k: v.to('cuda') for k, v in inputs.items()}
-        generated_ids = model.generate(
-            input_ids=inputs['input_ids'],
-            max_new_tokens=64,
-            eos_token_id=processor.tokenizer.eos_token_id,
-        )
-        generated_text = [
-            processor.tokenizer.decode(ids, skip_special_tokens=True)
-            for ids in generated_ids
-        ]
-        all_generated_texts.extend(generated_text)
-        labels = [
-            processor.tokenizer.decode(ids, skip_special_tokens=True)
-            for ids in inputs['labels']
-        ]
-        all_labels.extend(labels)
-
-    if save_path:
-        with open(save_path, 'w') as f:
-            json.dump({'generated_texts': all_generated_texts, 'labels': all_labels}, f)
-
-    return all_generated_texts, all_labels
-
-def create_model(model_name_or_path, use_flash_attention=False):
-    """Create and load the model with proper dtype and ensure it is moved to GPU."""
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name_or_path,
-        torch_dtype=torch.bfloat16 if use_flash_attention else torch.float32,  # Specify dtype
-        _attn_implementation='flash_attention_2' if use_flash_attention else 'sdpa',
-        trust_remote_code=True,
-    )
-    model = model.to('cuda')  # Explicitly move the model to GPU
-    return model
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--model_name_or_path', type=str, default='microsoft/Phi-4-multimodal-instruct', help='Model name or path to load from')
-    parser.add_argument('--train_file', type=str, default='ntnu-smil/LTTC-Train1764-0520', help='Hugging Face dataset name for training')
-    parser.add_argument('--dev_file', type=str, default='ntnu-smil/LTTC-dev1764-0520', help='Hugging Face dataset name for validation')
-    parser.add_argument('--output_dir', type=str, default='./output/', help='Output directory')
-    parser.add_argument('--batch_size', type=int, default=16, help='Batch size')
-    parser.add_argument('--num_train_epochs', type=int, default=3, help='Number of training epochs')
-    parser.add_argument('--learning_rate', type=float, default=4.0e-5, help='Learning rate')
-    parser.add_argument('--use_features', action='store_true', help='Use additional features from the dataset')
-    parser.add_argument('--use_flash_attention', action='store_true', help='Use Flash Attention')
-    parser.add_argument('--instruction', type=str, default=InstructionText, help='Instruction for the task')
+    parser.add_argument(
+        "--model_name_or_path",
+        type=str,
+        default="microsoft/Phi-4-multimodal-instruct",
+        help="Model name or path to load from",
+    )
+    parser.add_argument(
+        "--dataset_name",
+        type=str,
+        default="ntnu-smil/LTTC-Train-1764-0520",
+        help="Dataset name to use for training and evaluation",
+    )
+    parser.add_argument(
+        "--eval_dataset",
+        type=str,
+        default="ntnu-smil/LTTC-Dev-1764-0520",
+        help="Dataset split to use for evaluation",
+    )
+    parser.add_argument(
+        "--train_split",
+        type=str,
+        default="train",
+        help="Dataset split to use for training",
+    )
+    parser.add_argument(
+        "--eval_split",
+        type=str,
+        default="train",
+        help="Dataset split to use for testing",
+    )
+    
+    parser.add_argument(
+        "--max_train_samples",
+        type=int,
+        help="Maximum number of training samples",
+    )
+    parser.add_argument(
+        "--max_eval_samples",
+        type=int,
+        help="Maximum number of evaluation samples",
+    )
+    parser.add_argument(
+        "--use_flash_attention",
+        action="store_true",
+        help="Use Flash Attention for more efficient training on compatible hardware",
+    )
+    parser.add_argument(
+        "--output_dir",
+        type=str,
+        default="./output/",
+        help="Output directory for saving model checkpoints and logs",
+    )
+    parser.add_argument(
+        "--global_batch_size",
+        type=int,
+        default=128,
+        help="Total batch size across all GPUs (global_batch_size = batch_size_per_gpu * num_gpus * gradient_accumulation_steps)",
+    )
+    parser.add_argument(
+        "--batch_size_per_gpu",
+        type=int,
+        default=4,
+        help="Training batch size per GPU (decrease this value if you encounter OOM errors)",
+    )
+    parser.add_argument(
+        "--eval_batch_size_per_gpu",
+        type=int,
+        default=1,
+        help="Evaluation batch size per GPU (can typically be larger than training batch size since no gradients are stored)",
+    )
+    parser.add_argument(
+        "--num_train_epochs",
+        type=int,
+        default=1,
+        help="Number of complete passes through the training dataset",
+    )
+    parser.add_argument(
+        "--learning_rate",
+        type=float,
+        default=4.0e-5,
+        help="Peak learning rate for optimizer",
+    )
+    parser.add_argument(
+        "--weight_decay",
+        type=float,
+        default=0.01,
+        help="Weight decay coefficient for regularization",
+    )
+    parser.add_argument(
+        "--eval_metric",
+        type=str,
+        default="wer",
+        choices=["binary", "cl", "both"],
+        help="Evaluation metric: 'binary' for binary classification, 'cl' for traditional classfication, 'both' for both",
+    )
+    parser.add_argument(
+        "--text_column",
+        type=str,
+        default="grade",
+        help="Name of the column containing the answer score",
+    )
+    parser.add_argument(
+        "--audio_column",
+        type=str,
+        default="wav_path",
+        help="Name of the column containing the audio data",
+    )
+    parser.add_argument(
+        "--push_to_hub",
+        action="store_true",
+        help="Whether to push the model to the Hugging Face Hub after training",
+    )
+    parser.add_argument(
+        "--hub_model_id",
+        type=str,
+        help="Repository name to push to on the Hugging Face Hub (e.g., 'username/model-name')",
+    )
+    parser.add_argument(
+        "--no-tqdm", dest="tqdm", action="store_false", help="Disable tqdm"
+    )
+    parser.add_argument(
+        "--skip_initial_eval",
+        action="store_true",
+        help="Skip evaluation before training",
+    )
     args = parser.parse_args()
+
+    if args.push_to_hub:
+        try:
+            whoami()
+        except Exception as e:
+            print(
+                "You need to be logged in to the Hugging Face Hub to push the model. "
+                "Please run `huggingface-cli login`."
+            )
+            raise e
 
     accelerator = Accelerator()
 
     with accelerator.local_main_process_first():
-        processor = AutoProcessor.from_pretrained(args.model_name_or_path, trust_remote_code=True)
-        model = create_model(
+        model, processor = load_model_and_processor(
             args.model_name_or_path,
             use_flash_attention=args.use_flash_attention,
         )
 
-    model.set_lora_adapter('speech')
+    model.set_lora_adapter("speech")
 
+    rank = int(os.environ.get("RANK", 0))
+    world_size = int(os.environ.get("WORLD_SIZE", 1))
 
-    train_dataset = load_dataset(args.train_file)
-    dev_dataset = load_dataset(args.dev_file)
+    eval_dataset = FinetuneDataset(
+        processor,
+        dataset_name=args.eval_dataset,
+        split=args.eval_split,
+        training=False,
+        text_column=args.text_column,
+        audio_column=args.audio_column,
+        max_samples=args.max_eval_samples,
+        rank=rank,
+        world_size=world_size,
+        dataset_subset=args.dataset_subset,
+    )
+    train_dataset = FinetuneDataset(
+        processor,
+        dataset_name=args.dataset_name,
+        split=args.train_split,
+        training=True,
+        text_column=args.text_column,
+        audio_column=args.audio_column,
+        max_samples=args.max_train_samples,
+        rank=rank,
+        world_size=world_size,
+        dataset_subset=args.dataset_subset,
+    )
 
-    train_dataset = LTTC_Dataset(processor, train_dataset, split='train', instruction=args.instruction, training=True)
-    eval_dataset = LTTC_Dataset(processor, dev_dataset, split='train', instruction=args.instruction, training=False)
-
-    # Evaluate before fine-tuning
-    evaluate(model, processor, eval_dataset, save_path=os.path.join(args.output_dir, 'eval_before.json'))
+    num_gpus = accelerator.num_processes
+    print(f"training on {num_gpus} GPUs")
+    assert (
+        args.global_batch_size % (num_gpus * args.batch_size_per_gpu) == 0
+    ), "Batch size must be divisible by the number of GPUs"
+    gradient_accumulation_steps = args.global_batch_size // (
+        num_gpus * args.batch_size_per_gpu
+    )
 
     if args.use_flash_attention:
         fp16 = False
@@ -249,48 +212,135 @@ def main():
     else:
         fp16 = True
         bf16 = False
-    
+
     training_args = TrainingArguments(
         num_train_epochs=args.num_train_epochs,
-        per_device_train_batch_size=args.batch_size,
+        per_device_train_batch_size=args.batch_size_per_gpu,
+        gradient_checkpointing=True,
+        gradient_checkpointing_kwargs={"use_reentrant": False},
+        gradient_accumulation_steps=gradient_accumulation_steps,
+        optim="adamw_torch",
+        adam_beta1=0.9,
+        adam_beta2=0.95,
+        adam_epsilon=1e-7,
         learning_rate=args.learning_rate,
-        output_dir=args.output_dir,
-        evaluation_strategy='epoch',
-        save_strategy='epoch',
-        logging_dir='./logs',
+        weight_decay=args.weight_decay,
+        max_grad_norm=1.0,
+        lr_scheduler_type="linear",
+        warmup_steps=50,
         logging_steps=10,
-        disable_tqdm=not accelerator.is_local_main_process,
+        output_dir=args.output_dir,
+        save_strategy="epoch",
+        save_total_limit=3,
+        save_only_model=True,
         bf16=bf16,
         fp16=fp16,
+        remove_unused_columns=False,
+        report_to=["tensorboard"],
+        deepspeed=None,
+        disable_tqdm=not args.tqdm,
+        dataloader_num_workers=4,
+        ddp_find_unused_parameters=True,
+        push_to_hub=args.push_to_hub,
+        hub_model_id=args.hub_model_id if args.hub_model_id else None,
     )
-    
-    model.set_lora_adapter('speech')
-    
-    num_gpus = accelerator.num_processes
-    print(f'training on {num_gpus} GPUs')
-    
-    if args.use_flash_attention:
-        fp16 = False
-        bf16 = True
-    else:
-        fp16 = True
-        bf16 = False
-    
+
+    out_path = Path(training_args.output_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    # Make initial evaluation optional based on the new flag
+    if not args.skip_initial_eval:
+        score = evaluate(
+            model,
+            processor,
+            eval_dataset,
+            save_path=out_path / "eval_before.json",
+            disable_tqdm=not args.tqdm,
+            eval_batch_size=args.eval_batch_size_per_gpu,
+            metric=args.eval_metric,
+        )
+        if accelerator.is_main_process:
+            metric_name = args.eval_metric.upper()
+            print(
+                f"{metric_name} Score before finetuning: {score.get(args.eval_metric.lower()):.4f}"
+            )
+
     trainer = Trainer(
         model=model,
         args=training_args,
+        data_collator=collate_fn,
         train_dataset=train_dataset,
-        eval_dataset=eval_dataset,
     )
 
     trainer.train()
+
     trainer.save_model()
+    if accelerator.is_main_process:
+        processor.save_pretrained(training_args.output_dir)
+        if args.push_to_hub:
+            processor.push_to_hub(args.hub_model_id)
+
+    if args.push_to_hub:
+        # we need to remove chat_template.json on the hub
+        delete_file(
+            repo_id=args.hub_model_id,
+            path_in_repo="chat_template.json",
+            repo_type="model",
+        )
+        # we need to overwrite preprocessor_config.json on the hub
+        preprocessor_config = {
+            "auto_map": {
+                "AutoFeatureExtractor": "microsoft/Phi-4-multimodal-instruct--processing_phi4mm.Phi4MMAudioFeatureExtractor",
+                "AutoImageProcessor": "microsoft/Phi-4-multimodal-instruct--processing_phi4mm.Phi4MMImageProcessor",
+                "AutoProcessor": "microsoft/Phi-4-multimodal-instruct--processing_phi4mm.Phi4MMProcessor",
+            },
+            "feature_extractor_type": "Phi4MMAudioFeatureExtractor",
+            "image_processor_type": "Phi4MMImageProcessor",
+            "processor_class": "Phi4MMProcessor",
+            "audio_compression_rate": 8,
+            "audio_downsample_rate": 1,
+            "audio_feat_stride": 1,
+            "dynamic_hd": 36,
+        }
+        upload_file(
+            path_or_fileobj=json.dumps(preprocessor_config, indent=2).encode(),
+            path_in_repo="preprocessor_config.json",
+            repo_id=args.hub_model_id,
+            repo_type="model",
+        )
+
+    accelerator.wait_for_everyone()
 
     # Evaluate after fine-tuning
-    evaluate(model, processor, eval_dataset, save_path=os.path.join(args.output_dir, 'eval_after.json'))
+    del model
+    del trainer
+    __import__("gc").collect()
+    torch.cuda.empty_cache()
 
+    model = AutoModelForCausalLM.from_pretrained(
+        training_args.output_dir,
+        torch_dtype=torch.bfloat16 if args.use_flash_attention else torch.float32,
+        trust_remote_code=True,
+        _attn_implementation=(
+            "flash_attention_2" if args.use_flash_attention else "sdpa"
+        ),
+    ).to("cuda")
+
+    score = evaluate(
+        model,
+        processor,
+        eval_dataset,
+        save_path=out_path / "eval_after.json",
+        disable_tqdm=not args.tqdm,
+        eval_batch_size=args.eval_batch_size_per_gpu,
+        metric=args.eval_metric,
+    )
     if accelerator.is_main_process:
-        processor.save_pretrained(args.output_dir)
+        metric_name = args.eval_metric.upper()
+        print(
+            f"{metric_name} Score after finetuning: {score.get(args.eval_metric.lower()):.4f}"
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

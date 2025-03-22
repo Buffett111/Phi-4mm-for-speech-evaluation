@@ -28,11 +28,6 @@ def main():
         help="Dataset name to use for evaluation",
     )
     parser.add_argument(
-        "--dataset_subset",
-        type=str,
-        help="Dataset subset to use (e.g., 'zh-TW' for Common Voice 19)",
-    )
-    parser.add_argument(
         "--split",
         type=str,
         default="train",
@@ -61,7 +56,7 @@ def main():
         "--text_column",
         type=str,
         default="grade",
-        help="Name of the column containing the transcription text",
+        help="Name of the column containing the answer score",
     )
     parser.add_argument(
         "--audio_column",
