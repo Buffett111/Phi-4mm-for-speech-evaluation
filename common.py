@@ -18,7 +18,7 @@ import librosa
 
 ANSWER_SUFFIX = "<|end|><|endoftext|>"
 _IGNORE_INDEX = -100
-DEBUG = True
+DEBUG = False
 EXA = False
 QA = False
 def de_print(*args, **kwargs):
@@ -130,7 +130,7 @@ class BaseDataset(Dataset):
         processor,
         dataset_name,
         split,
-        text_column="text",
+        text_column="grade",
         audio_column="wav_path",
         question_column="prompt",
         max_samples=None,
@@ -145,8 +145,12 @@ class BaseDataset(Dataset):
         )
         if max_samples is not None:
             self.data = self.data.select(range(max_samples))
+        
+        if world_size is None:
+            raise ValueError("world_size must be an integer greater than 0.")
+        
         if world_size > 1:
-            self.data = self.data.shard(num_shards=world_size, index=rank)
+            self.data = self.data.shard(num_shards=self.world_size, index=rank)
         self.processor = processor
         self.instruction = InstructionText
         self.text_column = text_column
@@ -202,25 +206,40 @@ class FinetuneDataset(BaseDataset):
         dataset_name,
         split,
         training,
-        text_column="text",
-        audio_column="audio",
+        text_column="grade",
+        audio_column="wav_path",
+        question_column="prompt",
         max_samples=None,
         rank=0,
         world_size=1,
         dataset_subset=None,
-    ):
+    ):  
+        # print(f"Loading dataset '{dataset_name}' with split '{split}'")
+        # print(f"world_size: {world_size}")
+        
+        # Important! need to pass everything parent class needs, otherwise it won't initialize properly and send no warning
         super().__init__(
             processor,
             dataset_name,
             split,
             text_column,
             audio_column,
+            question_column,
             max_samples,
             rank,
             world_size,
             dataset_subset,
         )
         self.training = training
+
+        # Debugging: Print dataset size after loading
+        print(f"Loaded dataset '{dataset_name}' with {len(self.data)} samples.")
+
+        # Ensure required columns exist
+        required_columns = [self.text_column, self.audio_column, self.question_column]
+        for column in required_columns:
+            if column not in self.data.column_names:
+                raise ValueError(f"Missing required column '{column}' in the dataset.")
 
     def __getitem__(self, idx):
         """
@@ -229,9 +248,13 @@ class FinetuneDataset(BaseDataset):
           - '{text_column}': the answer score of the audio
         """
         data = self.data[idx]
+
+        # Debugging: Print the raw data sample
+        de_print(f"Processing sample {idx}: {data}")
+
         user_message = {
             "role": "user",
-            "content": "<|audio_1|> " + self.instruction,
+            "content": self.instruction + "<|audio_1|>" + self.question_column if QA else self.instruction + "<|audio_1|> ",
         }
         prompt = self.processor.tokenizer.apply_chat_template(
             [user_message], tokenize=False, add_generation_prompt=True
@@ -248,6 +271,7 @@ class FinetuneDataset(BaseDataset):
         )
         answer = f"{data[self.text_column]}{ANSWER_SUFFIX}"
         answer_ids = self.processor.tokenizer(answer, return_tensors="pt").input_ids
+
         if self.training:
             input_ids = torch.cat([inputs.input_ids, answer_ids], dim=1)
             labels = torch.full_like(input_ids, _IGNORE_INDEX)
@@ -256,13 +280,20 @@ class FinetuneDataset(BaseDataset):
             input_ids = inputs.input_ids
             labels = answer_ids
 
+        # Ensure labels are not empty
+        if labels.size(1) == 0:
+            labels = torch.full_like(input_ids, _IGNORE_INDEX)
+
+        # Debugging: Print processed input and labels
+        de_print(f"Processed input_ids: {input_ids.shape}, labels: {labels.shape}")
+
         return {
             "input_ids": input_ids,
             "labels": labels,
             "input_audio_embeds": inputs.input_audio_embeds,
             "audio_embed_sizes": inputs.audio_embed_sizes,
         }
-
+        
 
 # Utility functions for batching
 def pad_sequence(sequences, padding_side="right", padding_value=0):
@@ -440,10 +471,13 @@ def evaluate(
     all_labels = gather_object(all_labels)
 
     results = {}
+    if len(all_labels) == 0:
+        print("Error: No samples to evaluate.")
+        return results
+
     if rank == 0:
         assert len(all_generated_texts) == len(all_labels)
 
-        
         if metric.lower() == "cl":
             correct = 0
             # calculate accuracy by comparing the generated text with the labels
@@ -464,7 +498,34 @@ def evaluate(
             accuracy = correct / len(all_labels)
             results["accuracy"] = accuracy
             print(f"Accuracy: {accuracy:.4f}")
-        
+
+        if metric.lower() == "binary":
+            correct = 0
+            # calculate accuracy by comparing the generated text with the labels
+            # if level<=3 then 0 else 1
+            for i in range(len(all_labels)):
+                # de_print(f"Generated: {all_generated_texts[i]}")
+                # de_print(f"Label: {all_labels[i]}")
+                # try to extract the score from the generated text
+                try:
+                    tmp = all_generated_texts[i].split(" ")[0]
+                    tmp.strip('"\',\\/')
+                    generated_score = float(tmp)
+                    label_score = float(all_labels[i].split(" ")[0])
+                    if generated_score <= 3:
+                        generated_score = 0
+                    else:
+                        generated_score = 1
+                    if label_score <= 3:
+                        label_score = 0
+                    else:
+                        label_score = 1
+                    if generated_score == label_score:
+                        correct += 1
+                except Exception as e:
+                    print(f"Error: {e}")
+            binary_acc = correct / len(all_labels)
+            results["binary_accuracy"] = binary_acc
 
         results["num_samples"] = len(all_labels)
         print(f"Number of samples: {len(all_labels)}")
@@ -474,9 +535,12 @@ def evaluate(
                 save_dict = {
                     "all_generated_texts": all_generated_texts,
                     "all_labels": all_labels,
-                    "accuracy": accuracy,  # Add accuracy to the result JSON
                     **results,
                 }
+                if "accuracy" in results:
+                    save_dict["accuracy"] = results["accuracy"]
+                if "binary_accuracy" in results:
+                    save_dict["binary_accuracy"] = results["binary_accuracy"]
                 json.dump(save_dict, f, indent=4, ensure_ascii=False)
 
     return results

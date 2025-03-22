@@ -41,6 +41,12 @@ def main():
         help="Dataset split to use for evaluation",
     )
     parser.add_argument(
+        "--dataset_subset",
+        type=str,
+        default = None,
+        help="Dataset subset to use (e.g., 'zh-TW' for Common Voice 19)",
+    )
+    parser.add_argument(
         "--train_split",
         type=str,
         default="train",
@@ -77,13 +83,13 @@ def main():
     parser.add_argument(
         "--global_batch_size",
         type=int,
-        default=128,
+        default=16,
         help="Total batch size across all GPUs (global_batch_size = batch_size_per_gpu * num_gpus * gradient_accumulation_steps)",
     )
     parser.add_argument(
         "--batch_size_per_gpu",
         type=int,
-        default=4,
+        default=1,
         help="Training batch size per GPU (decrease this value if you encounter OOM errors)",
     )
     parser.add_argument(
@@ -113,7 +119,7 @@ def main():
     parser.add_argument(
         "--eval_metric",
         type=str,
-        default="wer",
+        default="cl",
         choices=["binary", "cl", "both"],
         help="Evaluation metric: 'binary' for binary classification, 'cl' for traditional classfication, 'both' for both",
     )
@@ -171,7 +177,13 @@ def main():
 
     rank = int(os.environ.get("RANK", 0))
     world_size = int(os.environ.get("WORLD_SIZE", 1))
+    
 
+    print(f"Rank: {rank}, World Size: {world_size}")
+    print(f"Model: {model.__class__.__name__}")
+    print(f"eval_dataset: {args.eval_dataset}")
+    print(f"train_dataset: {args.dataset_name}")
+    
     eval_dataset = FinetuneDataset(
         processor,
         dataset_name=args.eval_dataset,
@@ -196,6 +208,16 @@ def main():
         world_size=world_size,
         dataset_subset=args.dataset_subset,
     )
+
+    # Debugging: Print dataset sizes
+    print(f"Train dataset size: {len(train_dataset)}")
+    print(f"Eval dataset size: {len(eval_dataset)}")
+
+    # Check for empty datasets
+    if len(train_dataset) == 0:
+        raise ValueError("Train dataset is empty. Please check the dataset configuration.")
+    if len(eval_dataset) == 0:
+        raise ValueError("Eval dataset is empty. Please check the dataset configuration.")
 
     num_gpus = accelerator.num_processes
     print(f"training on {num_gpus} GPUs")
@@ -261,9 +283,15 @@ def main():
         )
         if accelerator.is_main_process:
             metric_name = args.eval_metric.upper()
-            print(
-                f"{metric_name} Score before finetuning: {score.get(args.eval_metric.lower()):.4f}"
-            )
+            metric_value = score.get("accuracy")
+            if metric_value is not None:
+                print(
+                    f"{metric_name} Score before finetuning: {metric_value:.4f}"
+                )
+            else:
+                print(
+                    f"{metric_name} Score before finetuning could not be computed. Please check the evaluation setup."
+                )
 
     trainer = Trainer(
         model=model,
@@ -337,9 +365,15 @@ def main():
     )
     if accelerator.is_main_process:
         metric_name = args.eval_metric.upper()
-        print(
-            f"{metric_name} Score after finetuning: {score.get(args.eval_metric.lower()):.4f}"
-        )
+        metric_value = score.get(args.eval_metric.lower())
+        if metric_value is not None:
+            print(
+                f"{metric_name} Score after finetuning: {metric_value:.4f}"
+            )
+        else:
+            print(
+                f"{metric_name} Score after finetuning could not be computed. Please check the evaluation setup."
+            )
 
 
 if __name__ == "__main__":

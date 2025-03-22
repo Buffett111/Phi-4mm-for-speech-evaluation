@@ -24,8 +24,13 @@ def main():
     parser.add_argument(
         "--dataset_name",
         type=str,
-        default="ntnu-smil/LTTC-Train1964-0520",
+        default="ntnu-smil/LTTC-Dev-1764-0520",
         help="Dataset name to use for evaluation",
+    )
+    parser.add_argument(
+        "--dataset_subset",
+        type=str,
+        help="Dataset subset to use (e.g., 'zh-TW' for Common Voice 19)",
     )
     parser.add_argument(
         "--split",
