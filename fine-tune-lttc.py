@@ -25,7 +25,7 @@ def main():
     parser.add_argument(
         "--model_name_or_path",
         type=str,
-        default="microsoft/Phi-4-multimodal-instruct",
+        default="microsoft/Phi-4-multimodal-instruct", #base model
         help="Model name or path to load from",
     )
     parser.add_argument(
@@ -143,6 +143,7 @@ def main():
     parser.add_argument(
         "--hub_model_id",
         type=str,
+        default="ntnu-smil/phi-4-multimodal-instruct-lttc-NoQA-NoImage-0323",
         help="Repository name to push to on the Hugging Face Hub (e.g., 'username/model-name')",
     )
     parser.add_argument(
@@ -155,6 +156,11 @@ def main():
     )
     args = parser.parse_args()
 
+    if args.model_name_or_path.endswith("/"):
+        raise ValueError(
+            f"Invalid model_name_or_path: '{args.model_name_or_path}'. It should not end with a '/'."
+        )
+
     if args.push_to_hub:
         try:
             whoami()
@@ -164,7 +170,10 @@ def main():
                 "Please run `huggingface-cli login`."
             )
             raise e
+        if args.hub_model_id is None:
+            raise ValueError("Please provide a valid repository name to push to the Hugging Face Hub.")
 
+        print(f"Push model to {args.hub_model_id} after training.")
     accelerator = Accelerator()
 
     with accelerator.local_main_process_first():
@@ -270,6 +279,22 @@ def main():
     out_path = Path(training_args.output_dir)
     out_path.mkdir(parents=True, exist_ok=True)
 
+    #test if  it can load the local pretrained model
+    # try:
+    #     print(f"Loading model from {training_args.output_dir}")
+    #     model = AutoModelForCausalLM.from_pretrained(
+    #         training_args.output_dir,
+    #         torch_dtype=torch.bfloat16 if args.use_flash_attention else torch.float32,
+    #         trust_remote_code=True,
+    #         _attn_implementation=(
+    #             "flash_attention_2" if args.use_flash_attention else "sdpa"
+    #         ),
+    #     ).to("cuda")
+    # except ModuleNotFoundError as e:
+    #     print(f"Error loading model: {e}")
+    #     print("Ensure that the required modules are available and correctly referenced.")
+    #     raise e
+    
     # Make initial evaluation optional based on the new flag
     if not args.skip_initial_eval:
         score = evaluate(
@@ -345,14 +370,19 @@ def main():
     __import__("gc").collect()
     torch.cuda.empty_cache()
 
-    model = AutoModelForCausalLM.from_pretrained(
-        training_args.output_dir,
-        torch_dtype=torch.bfloat16 if args.use_flash_attention else torch.float32,
-        trust_remote_code=True,
-        _attn_implementation=(
-            "flash_attention_2" if args.use_flash_attention else "sdpa"
-        ),
-    ).to("cuda")
+    try:
+        model = AutoModelForCausalLM.from_pretrained(
+            training_args.output_dir,
+            torch_dtype=torch.bfloat16 if args.use_flash_attention else torch.float32,
+            trust_remote_code=True,
+            _attn_implementation=(
+                "flash_attention_2" if args.use_flash_attention else "sdpa"
+            ),
+        ).to("cuda")
+    except ModuleNotFoundError as e:
+        print(f"Error loading model: {e}")
+        print("Ensure that the required modules are available and correctly referenced.")
+        raise e
 
     score = evaluate(
         model,
