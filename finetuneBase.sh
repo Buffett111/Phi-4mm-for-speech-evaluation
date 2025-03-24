@@ -31,7 +31,7 @@ python3 fine-tune-lttc.py \
     --use_flash_attention \
     --output_dir "${exp_dir}" \
     --global_batch_size 16 \
-    --num_train_epochs 2 \
+    --num_train_epochs 3 \
     --learning_rate "${LEARNING_RATE}" \
     --dataset_name "${train_file}" \
     --eval_dataset "${dev_file}" \

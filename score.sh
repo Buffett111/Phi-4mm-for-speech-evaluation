@@ -5,7 +5,7 @@ conda activate Phi4
 
 form_id='1964'
 #module_type="phi-4-multimodal-instruct-lttc"
-module_type="phi-4-multimodal-instruct-lttc-NoQA-NoImage-0323"
+module_type="Phi-4-multimodal-instruct_QA_NoImage_0325"
 exp_dir="./LTTC-Intermediate/IS-${form_id}/eval_after"
 
 python3 eval.py \
