@@ -20,7 +20,7 @@ ANSWER_SUFFIX = "<|end|><|endoftext|>"
 _IGNORE_INDEX = -100
 DEBUG = False
 EXA = False
-QA = False
+QA = True
 def de_print(*args, **kwargs):
     if DEBUG:
         print(*args, **kwargs)
@@ -252,9 +252,10 @@ class FinetuneDataset(BaseDataset):
         # Debugging: Print the raw data sample
         de_print(f"Processing sample {idx}: {data}")
 
+        # change the order of the prompt QA before audio to prevent the model from answering the question before listening to the audio rather than giving the score
         user_message = {
             "role": "user",
-            "content": self.instruction + "<|audio_1|>" + self.question_column if QA else self.instruction + "<|audio_1|> ",
+            "content": self.instruction + self.question_column + "<|audio_1|>"  if QA else self.instruction + "<|audio_1|> ",
         }
         prompt = self.processor.tokenizer.apply_chat_template(
             [user_message], tokenize=False, add_generation_prompt=True
@@ -400,7 +401,7 @@ def evaluate(
     save_path=None,
     disable_tqdm=False,
     eval_batch_size=1,
-    metric="cl",
+    metric="both",
 ):
     """
     Evaluate the model on the dataset and calculate accuracy.
@@ -478,7 +479,7 @@ def evaluate(
     if rank == 0:
         assert len(all_generated_texts) == len(all_labels)
 
-        if metric.lower() == "cl":
+        if metric.lower() == "cl" or metric.lower() == "both":
             correct = 0
             # calculate accuracy by comparing the generated text with the labels
             for i in range(len(all_labels)):
@@ -499,31 +500,36 @@ def evaluate(
             results["accuracy"] = accuracy
             print(f"Accuracy: {accuracy:.4f}")
 
-        if metric.lower() == "binary":
+        if metric.lower() == "binary" or metric.lower() == "both":
             correct = 0
             # calculate accuracy by comparing the generated text with the labels
-            # if level<=3 then 0 else 1
             for i in range(len(all_labels)):
-                # de_print(f"Generated: {all_generated_texts[i]}")
-                # de_print(f"Label: {all_labels[i]}")
-                # try to extract the score from the generated text
                 try:
                     tmp = all_generated_texts[i].split(" ")[0]
                     tmp.strip('"\',\\/')
                     generated_score = float(tmp)
                     label_score = float(all_labels[i].split(" ")[0])
-                    if generated_score <= 3:
-                        generated_score = 0
+                    
+                    # Round down scores based on decimal portion
+                    if generated_score - int(generated_score) <= 0.5:
+                        generated_score = int(generated_score)
                     else:
-                        generated_score = 1
-                    if label_score <= 3:
-                        label_score = 0
+                        generated_score = int(generated_score) + 1
+                        
+                    if label_score - int(label_score) <= 0.5:
+                        label_score = int(label_score)
                     else:
-                        label_score = 1
-                    if generated_score == label_score:
+                        label_score = int(label_score) + 1
+                    
+                    # Convert to binary pass/fail
+                    generated_binary = 1 if generated_score > 3 else 0
+                    label_binary = 1 if label_score > 3 else 0
+                    
+                    if generated_binary == label_binary:
                         correct += 1
                 except Exception as e:
                     print(f"Error: {e}")
+                    
             binary_acc = correct / len(all_labels)
             results["binary_accuracy"] = binary_acc
 

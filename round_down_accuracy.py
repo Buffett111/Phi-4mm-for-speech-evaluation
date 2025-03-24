@@ -24,4 +24,4 @@ def load_and_process(json_file):
 
 if __name__ == "__main__":
     # 把你的 JSON 檔案命名為 data.json，或改成你實際的檔案名
-    load_and_process("./LTTC-Intermediate/IS-1964/phi-4-multimodal-instruct-lttc-NoQA-NoImage_0323/eval_before.json")
+    load_and_process("./LTTC-Intermediate/IS-1964/phi-4-multimodal-instruct-lttc-NoQA-NoImage_0323/eval_after.json")
