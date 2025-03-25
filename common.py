@@ -539,8 +539,10 @@ def evaluate(
         if save_path:
             with open(save_path, "w") as f:
                 save_dict = {
-                    "all_generated_texts": all_generated_texts,
-                    "all_labels": all_labels,
+                    "predictions_and_labels": [
+                        {"prediction": pred, "label": label}
+                        for pred, label in zip(all_generated_texts, all_labels)
+                    ],
                     **results,
                 }
                 if "accuracy" in results:
