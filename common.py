@@ -63,7 +63,7 @@ InstructionText = f"""
 "role": "system",
 "content": "You are responsible for evaluating English pronunciation. The provided audio is a response to the question below. \
 Your task is to objectively assign scores from 0 to 5 based on the following criteria: sentence-level accuracy, fluency, prosody, and completeness. \
-Please also consider how well the audio answers the given question. \
+Please also consider how well the audio answers the given question,that is, the relevance of the question and the answer. \
 Finally, provide an overall score from 0 to 5. Your evaluation should remain neutral and fair. \
 Assign scores according to the following criteria:"
 ,

@@ -5,8 +5,11 @@ conda activate Phi4
 
 form_id='1964'
 #module_type="phi-4-multimodal-instruct-lttc"
-module_type="Phi-4-multimodal-instruct_QA_NoImage_0325"
-exp_dir="./LTTC-Intermediate/IS-${form_id}/eval_after"
+#module_type="Phi-4-multimodal-instruct_QA_NoImage_0325"
+module_type="Phi-4-multimodal-instruct_QA_NoImage_0325_1964"
+exp_dir="./LTTC-Intermediate/Phi-4-mm_QA_NoImage_0325_1964/IS-${form_id}"
+
+# --model_name_or_path "ntnu-smil/${module_type}" \
 
 python3 eval.py \
     --model_name_or_path "ntnu-smil/${module_type}" \

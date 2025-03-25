@@ -4,9 +4,9 @@
 # conda activate Phi4
 # ======================= Intermediate ======================= 
 form_id='1964' # 1572, 1764, 1766, 1964(Main)
-date='0323'
+date='0325'
 LEARNING_RATE='4.0e-5' # 1e-3
-module_type="phi-4-multimodal-instruct-lttc"  # Removed space after '='
+module_type="Phi-4-multimodal-instruct_QA_NoImage_0325"  # Removed space after '='
 
 # module_type= "microsoft/Phi-4-multimodal-instruct"
 # module_type= "models/LTTC-Intermediate/IS-1764/Phi-4-multimodal-instruct_0323" 
@@ -18,7 +18,7 @@ module_type="phi-4-multimodal-instruct-lttc"  # Removed space after '='
 train_file="ntnu-smil/LTTC-Train1964-0520"
 dev_file="ntnu-smil/LTTC-Dev-1964-0520"
 
-exp_dir="./LTTC-Intermediate/IS-${form_id}/${module_type}_${date}"
+exp_dir="./LTTC-Intermediate/IS-${form_id}/${module_type}_${form_id}"
 
 
 # train: train.py, train_softlabel, train_wav2vec, train_subModel, pretrained Model
@@ -37,5 +37,6 @@ python3 fine-tune-lttc.py \
     --dataset_name "${train_file}" \
     --eval_dataset "${dev_file}" \
     --eval_batch_size_per_gpu 1 \
-    --push_to_hub
+    --push_to_hub \
+    --hub_model_id "ntnu-smil/${module_type}_${form_id}" \
     # --skip_initial_eval

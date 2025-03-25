@@ -119,7 +119,7 @@ def main():
     parser.add_argument(
         "--eval_metric",
         type=str,
-        default="cl",
+        default="both",
         choices=["binary", "cl", "both"],
         help="Evaluation metric: 'binary' for binary classification, 'cl' for traditional classfication, 'both' for both",
     )
