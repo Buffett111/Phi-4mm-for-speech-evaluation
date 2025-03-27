@@ -55,7 +55,7 @@ def main():
     parser.add_argument(
         "--eval_split",
         type=str,
-        default="train",
+        default="test",
         help="Dataset split to use for testing",
     )
     
