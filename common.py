@@ -444,8 +444,12 @@ def evaluate(
             ]
         )
         inputs = inputs.to(f"cuda:{local_rank}")
+        generate_inputs = {
+            k: v for k, v in inputs.items() 
+            if k not in ['labels']  # Explicitly exclude labels
+        }
         generated_ids = model.generate(
-            **inputs,
+            **generate_inputs,
             eos_token_id=processor.tokenizer.eos_token_id,
             max_new_tokens=320,
             stopping_criteria=stopping_criteria,
