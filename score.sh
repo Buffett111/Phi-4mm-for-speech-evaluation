@@ -18,6 +18,6 @@ python3 eval.py \
     --metric "both" \
     --dataset_name "ntnu-smil/Unseen_1964" \
     --audio_column "wav_file" \
-    --split "fulltest" \
+    --split "test" \
 
 # --dataset_name "ntnu-smil/LTTC-Dev-${form_id}-0520" \
