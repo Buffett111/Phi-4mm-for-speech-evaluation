@@ -111,9 +111,6 @@ The project primarily uses:
 - **ntnu-smil/LTTC-Train-1764-0520**: For training
 - **ntnu-smil/LTTC-Dev-1764-0520**: For evaluation
 
-## License
-
-[Specify license]
 
 ## Acknowledgements
 
