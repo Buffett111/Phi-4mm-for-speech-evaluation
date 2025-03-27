@@ -6,7 +6,8 @@ def custom_round(value):
     # X.5 -> X, X.6 -> X+1
     if value - int(value) <= 0.5:
         return float(int(value) + 0)
-    return float(int(value))
+    else:
+        return float(int(value) + 1)
 
 def load_and_process(json_file):
     with open(json_file, "r") as f:

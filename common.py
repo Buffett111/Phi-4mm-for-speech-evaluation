@@ -392,6 +392,11 @@ def load_model_and_processor(model_name_or_path, use_flash_attention=False):
 
     return model, processor
 
+def round_score(score):
+    if score - int(score) <= 0.5:
+        return int(score)
+    else:
+        return int(score) + 1
 
 @torch.no_grad()
 def evaluate(
@@ -488,7 +493,7 @@ def evaluate(
                 # try to extract the score from the generated text
                 try:
                     tmp = all_generated_texts[i].split(" ")[0]
-                    tmp.strip('"\',\\/')
+                    tmp = tmp.strip('"\',\\/')
                     generated_score = float(tmp)
                     label_score = float(all_labels[i].split(" ")[0])
                     if abs(generated_score - label_score) <= 0.5:
@@ -499,6 +504,28 @@ def evaluate(
             accuracy = correct / len(all_labels)
             results["accuracy"] = accuracy
             print(f"Accuracy: {accuracy:.4f}")
+            
+            # calculate absolute accuracy
+            absolute_acc = 0
+            for i in range(len(all_labels)):
+                try:
+                    tmp = all_generated_texts[i].split(" ")[0]
+                    tmp = tmp.strip('"\',\\/')
+                    gen_score = float(tmp)
+                    label_score = float(all_labels[i].split(" ")[0])
+                    
+                    # Round scores based on the provided rule
+                    gen_rounded = round_score(gen_score)
+                    label_rounded = round_score(label_score)
+                    
+                    if gen_rounded == label_rounded:
+                        absolute_acc += 1
+                except Exception as e:
+                    print(f"Error calculating absolute accuracy for sample {i}: {e}")
+            
+            absolute_acc = absolute_acc / len(all_labels)
+            results["absolute_accuracy"] = absolute_acc
+            print(f"Absolute Accuracy: {absolute_acc:.4f}")
 
         if metric.lower() == "binary" or metric.lower() == "both":
             correct = 0
@@ -506,32 +533,26 @@ def evaluate(
             for i in range(len(all_labels)):
                 try:
                     tmp = all_generated_texts[i].split(" ")[0]
-                    tmp.strip('"\',\\/')
-                    generated_score = float(tmp)
+                    tmp = tmp.strip('"\',\\/')
+                    gen_score = float(tmp)
                     label_score = float(all_labels[i].split(" ")[0])
                     
-                    # Round down scores based on decimal portion
-                    if generated_score - int(generated_score) <= 0.5:
-                        generated_score = int(generated_score)
-                    else:
-                        generated_score = int(generated_score) + 1
-                        
-                    if label_score - int(label_score) <= 0.5:
-                        label_score = int(label_score)
-                    else:
-                        label_score = int(label_score) + 1
+                    # Round scores based on the provided rule
+                    gen_rounded = round_score(gen_score)
+                    label_rounded = round_score(label_score)
                     
                     # Convert to binary pass/fail
-                    generated_binary = 1 if generated_score > 3 else 0
-                    label_binary = 1 if label_score > 3 else 0
+                    gen_binary = 1 if gen_rounded > 3 else 0
+                    label_binary = 1 if label_rounded > 3 else 0
                     
-                    if generated_binary == label_binary:
+                    if gen_binary == label_binary:
                         correct += 1
                 except Exception as e:
-                    print(f"Error: {e}")
+                    print(f"Error calculating binary accuracy for sample {i}: {e}")
                     
             binary_acc = correct / len(all_labels)
             results["binary_accuracy"] = binary_acc
+            print(f"Binary Accuracy: {binary_acc:.4f}")
 
         results["num_samples"] = len(all_labels)
         print(f"Number of samples: {len(all_labels)}")

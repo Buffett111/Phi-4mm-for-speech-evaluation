@@ -115,6 +115,8 @@ def main():
     save_path = out_path / results_filename
 
     # Run evaluation
+    print(f"Evaluating {model_name} on {dataset_name} {args.split}...")
+    
     evaluate(
         model,
         processor,
