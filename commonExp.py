@@ -139,9 +139,9 @@ class BaseDataset(Dataset):
         dataset_subset=None,
     ):
         self.data = (
-            load_dataset(dataset_name, dataset_subset, split=split,revision="d6dc7c69f435059c9718e92aa2b4f93211879084")
+            load_dataset(dataset_name, dataset_subset, split=split)
             if dataset_subset
-            else load_dataset(dataset_name, split=split,revision="d6dc7c69f435059c9718e92aa2b4f93211879084")
+            else load_dataset(dataset_name, split=split)
         )
         if max_samples is not None:
             self.data = self.data.select(range(max_samples))
@@ -169,13 +169,11 @@ class EvalDataset(BaseDataset):
           - '{text_column}': the answer score of the audio
         """
         data = self.data[idx]
-        user_message = {
-            "role": "user",
-            "content": self.instruction + "<|audio_1|>" + self.question_column if QA else self.instruction + "<|audio_1|> ",
-        }
-        prompt = self.processor.tokenizer.apply_chat_template(
-            [user_message], tokenize=False, add_generation_prompt=True
-        )
+        
+        # Use a hardcoded prompt instead of chat template since we're having issues with the processor
+        prompt = "<|user|><|audio_1|>Score the test-taker's speech.<|end|><|assistant|>"
+        
+        # First, tokenize the text part only
         inputs = self.processor(
             text=prompt,
             audios=[
@@ -186,6 +184,10 @@ class EvalDataset(BaseDataset):
             ],
             return_tensors="pt",
         )
+        
+        # Combine inputs
+        
+        # Create answer tokens
         answer = f"{data[self.text_column]}{ANSWER_SUFFIX}"
         answer_ids = self.processor.tokenizer(answer, return_tensors="pt").input_ids
         input_ids = inputs.input_ids
@@ -199,102 +201,6 @@ class EvalDataset(BaseDataset):
         }
 
 
-
-class FinetuneDataset(BaseDataset):
-    def __init__(
-        self,
-        processor,
-        dataset_name,
-        split,
-        training,
-        text_column="grade",
-        audio_column="wav_path",
-        question_column="prompt",
-        max_samples=None,
-        rank=0,
-        world_size=1,
-        dataset_subset=None,
-    ):  
-        # print(f"Loading dataset '{dataset_name}' with split '{split}'")
-        # print(f"world_size: {world_size}")
-        
-        # Important! need to pass everything parent class needs, otherwise it won't initialize properly and send no warning
-        super().__init__(
-            processor,
-            dataset_name,
-            split,
-            text_column,
-            audio_column,
-            question_column,
-            max_samples,
-            rank,
-            world_size,
-            dataset_subset,
-        )
-        self.training = training
-
-        # Debugging: Print dataset size after loading
-        print(f"Loaded dataset '{dataset_name}' with {len(self.data)} samples.")
-
-        # Ensure required columns exist
-        required_columns = [self.text_column, self.audio_column, self.question_column]
-        for column in required_columns:
-            if column not in self.data.column_names:
-                raise ValueError(f"Missing required column '{column}' in the dataset.")
-
-    def __getitem__(self, idx):
-        """
-        Each example in the dataset is expected to have:
-          - '{audio_column}': a dict with keys "array" and "sampling_rate"
-          - '{text_column}': the answer score of the audio
-        """
-        data = self.data[idx]
-
-        # Debugging: Print the raw data sample
-        de_print(f"Processing sample {idx}: {data}")
-
-        # change the order of the prompt QA before audio to prevent the model from answering the question before listening to the audio rather than giving the score
-        user_message = {
-            "role": "user",
-            "content": self.instruction + self.question_column + "<|audio_1|>"  if QA else self.instruction + "<|audio_1|> ",
-        }
-        prompt = self.processor.tokenizer.apply_chat_template(
-            [user_message], tokenize=False, add_generation_prompt=True
-        )
-        inputs = self.processor(
-            text=prompt,
-            audios=[
-                (
-                    data[self.audio_column]["array"],
-                    data[self.audio_column]["sampling_rate"],
-                )
-            ],
-            return_tensors="pt",
-        )
-        answer = f"{data[self.text_column]}{ANSWER_SUFFIX}"
-        answer_ids = self.processor.tokenizer(answer, return_tensors="pt").input_ids
-
-        if self.training:
-            input_ids = torch.cat([inputs.input_ids, answer_ids], dim=1)
-            labels = torch.full_like(input_ids, _IGNORE_INDEX)
-            labels[:, -answer_ids.shape[1] :] = answer_ids
-        else:
-            input_ids = inputs.input_ids
-            labels = answer_ids
-
-        # Ensure labels are not empty
-        if labels.size(1) == 0:
-            labels = torch.full_like(input_ids, _IGNORE_INDEX)
-
-        # Debugging: Print processed input and labels
-        de_print(f"Processed input_ids: {input_ids.shape}, labels: {labels.shape}")
-
-        return {
-            "input_ids": input_ids,
-            "labels": labels,
-            "input_audio_embeds": inputs.input_audio_embeds,
-            "audio_embed_sizes": inputs.audio_embed_sizes,
-        }
         
 
 # Utility functions for batching
@@ -390,6 +296,8 @@ def load_model_and_processor(model_name_or_path, use_flash_attention=False):
         _attn_implementation="flash_attention_2" if use_flash_attention else "sdpa",
         trust_remote_code=True,
     ).to("cuda" if torch.cuda.is_available() else "cpu")
+    
+    processor = AutoProcessor.from_pretrained("microsoft/Phi-4-multimodal-instruct", trust_remote_code=True)
 
     return model, processor
 
@@ -464,7 +372,7 @@ def evaluate(
             generated_ids.shape[-1],
         )
         generated_text = [
-            processor.decode(
+            processor.tokenizer.decode(
                 _pred_ids[inputs["input_ids"].shape[1] : _stop_tokens_idx],
                 skip_special_tokens=True,
                 clean_up_tokenization_spaces=False,
@@ -473,7 +381,7 @@ def evaluate(
         ]
         all_generated_texts.extend(generated_text)
         labels = [
-            processor.decode(_label_ids[_label_ids != 0]).removesuffix(ANSWER_SUFFIX)
+            processor.tokenizer.decode(_label_ids[_label_ids != 0]).removesuffix(ANSWER_SUFFIX)
             for _label_ids in inputs["labels"]
         ]
         all_labels.extend(labels)
@@ -585,38 +493,32 @@ def scoring_audio(model, processor, audio_path, question):
 
     # Load and preprocess audio
     try:
-        # Check if we need to load audio from a path
-        if isinstance(audio_path, str):
-            print(f"Loading audio from path: {audio_path}")
-            audio, sr = librosa.load(audio_path, sr=16000)
-        elif isinstance(audio_path, dict):
-            if "array" in audio_path and "sampling_rate" in audio_path:
-                audio, sr = audio_path["array"], audio_path["sampling_rate"]
-            else:
-                # Try to find a path in the dict
-                path = audio_path.get("path", audio_path)
-                print(f"Loading audio from path in dict: {path}")
-                audio, sr = librosa.load(path, sr=16000)
-        else:
-            raise ValueError(f"Unsupported audio input type: {type(audio_path)}")
+        audio, sr = audio_path["array"], audio_path["sampling_rate"]
     except Exception as e:
         raise ValueError(f"Error loading audio file {audio_path}: {e}")
 
     # Prepare input for the model
-    user_message = {
-        "role": "user",
-        "content": InstructionText + "<|audio_1|> " + question,
-    }
-    prompt = processor.tokenizer.apply_chat_template(
-        [user_message], tokenize=False, add_generation_prompt=True
-    )
-
-    # Process input
-    inputs = processor(
-        text=prompt,
-        audios=[(audio, sr)],
+    prompt_text = InstructionText + "<|audio_1|> " + question
+    
+    # Process text and audio separately
+    text_inputs = processor.tokenizer(
+        prompt_text,
         return_tensors="pt",
     )
+    
+    audio_inputs = processor.feature_extractor(
+        [audio],
+        sampling_rate=sr,
+        return_tensors="pt",
+    )
+    
+    # Combine inputs into the format expected by the model
+    inputs = {
+        "input_ids": text_inputs.input_ids,
+        "attention_mask": text_inputs.attention_mask,
+        "input_audio_embeds": audio_inputs.input_features,
+        "audio_embed_sizes": torch.tensor([audio_inputs.input_features.shape[1]]),
+    }
 
     # Move inputs to the same device as the model
     inputs = {
@@ -643,7 +545,7 @@ def scoring_audio(model, processor, audio_path, question):
         )
 
     # Decode the generated text
-    transcription = processor.decode(
+    transcription = processor.tokenizer.decode(
         generated_ids[0, inputs["input_ids"].shape[1]:],
         skip_special_tokens=True,
         clean_up_tokenization_spaces=False,

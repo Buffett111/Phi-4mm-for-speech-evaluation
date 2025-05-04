@@ -1,0 +1,2885 @@
+{
+    "predictions_and_labels": [
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.99",
+            "label": "0,0.99"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.99",
+            "label": "0,0.99"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.80",
+            "label": "0,0.80"
+        },
+        {
+            "prediction": "1,0.75",
+            "label": "1,0.75"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.95",
+            "label": "1,0.95"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "0,0.50",
+            "label": "0,0.50"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "1,0.65",
+            "label": "1,0.65"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        },
+        {
+            "prediction": "0,0.70",
+            "label": "0,0.70"
+        }
+    ],
+    "binary_accuracy": 1.0,
+    "probability_mse": 0.0002364394993045896,
+    "probability_accuracy": 0.9930458970792768,
+    "combined_score": 0.9979137691237829,
+    "num_samples": 719
+}

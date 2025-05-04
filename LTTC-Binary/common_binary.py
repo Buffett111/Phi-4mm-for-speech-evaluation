@@ -1,5 +1,6 @@
 import os
 import json
+import re
 
 import torch
 # import jiwer
@@ -59,25 +60,71 @@ EXAMPLES = """
 # completeness, and provide overall total score from 0 to 5. \
 # Your grading should be neutral and objective. \
 # Assign a score from 0 to 5 using the following criteria: "
+
+# Function to convert scores to binary format with probability
+def convert_to_binary_prob(score):
+    """
+    Convert original LTTC scores (1-5) to binary classification with probability
+    
+    Args:
+        score (float): Original score between 1-5
+        
+    Returns:
+        tuple: (binary_label, probability)
+            - binary_label: 1 if pass (score >= 4), 0 if fail (score < 4)
+            - probability: Confidence in the classification
+    """
+    # Convert score to float to handle string inputs
+    score = float(score)
+    
+    # Determine binary label (pass/fail)
+    binary_label = 1 if score >= 4.0 else 0
+    
+    # Calculate probability based on score
+    if score <= 1.0:
+        # Score 1: {0, 0.99}
+        probability = 0.99
+    elif score <= 2.0:
+        # Score 2: {0, 0.80}
+        probability = 0.80
+    elif score <= 3.0:
+        # Score 3: {0, 0.70}
+        probability = 0.70
+    elif score < 4.0:
+        # Score 3.5: {0, 0.50}
+        # Linear interpolation between 3 and 4
+        probability = 0.70 - ((score - 3.0) / (4.0 - 3.0)) * (0.70 - 0.30)
+    elif score < 5.0:
+        # Score 4: {1, 0.75}
+        # Linear interpolation between 4 and 5
+        probability = 0.65 + ((score - 4.0) / (5.0 - 4.0)) * (0.20)
+    else:
+        # Score 5: {1, 0.95}
+        probability = 0.95
+    
+    # If binary_label is 0 (fail), probability represents confidence in failing
+    # If binary_label is 1 (pass), probability represents confidence in passing
+    
+    return (binary_label, probability)
+       
+# Instruction text for binary classification with probability
 InstructionText = f"""
 "role": "system",
 "content": "You are responsible for evaluating English pronunciation. The provided audio is a response to the question below. \
-Your task is to objectively assign scores from 0 to 5 based on the following criteria: sentence-level accuracy, fluency, prosody, and completeness. \
-Please also consider how well the audio answers the given question,that is, the relevance of the question and the answer. \
-Finally, provide an overall score from 0 to 5. Your evaluation should remain neutral and fair. \
-Assign scores according to the following criteria:"
+Your task is to objectively assess if the pronunciation passes the minimum standard. \
+Please consider sentence-level accuracy, fluency, prosody, completeness, and relevance to the question. \
+Assign a binary score (0 for fail, 1 for pass) along with a probability indicating your confidence. \
+For example, '1,0.85' means you believe it passes with 85% confidence, while '0,0.90' means you believe it fails with 90% confidence."
 ,
 "role": "system",
-"content": "Score 5: Pronunciation and intonation are correct and natural. The speaker expresses themselves fluently, with no communication barriers. \
-Score 4: Pronunciation and intonation are mostly correct and natural. There are some errors, but they do not hinder understanding. The speaker expresses themselves fairly fluently without communication barriers. \
-Score 3: Pronunciation and intonation occasionally have errors but remain understandable. The speaking speed is slower, with occasional pauses, but communication is still achievable. \
-Score 2: Pronunciation and intonation frequently have errors, which affect the listener's understanding. The speaking speed is slow, with frequent pauses that impact the delivery. \
-Score 1: Pronunciation and intonation have numerous errors, with many inappropriate pauses, making it difficult for the listener to understand. \
-Score 0: No response or the response is equivalent to no response. \
-Please follow these guidelines when evaluating the score provided."
-{EXAMPLES if EXA else ""}
+"content": "Scoring criteria: \
+- Score 0 (Fail): Pronunciation has significant errors, lacks fluency, or has inappropriate pauses that make it difficult to understand. \
+- Score 1 (Pass): Pronunciation and intonation are generally correct, the speaker expresses themselves with reasonable fluency, \
+and any errors do not significantly hinder understanding. \
+Please consider both the pronunciation quality and the relevance to the question when making your assessment."
+,
 "role": "user", 
-"content": "You should only return the final score of the following input. The output should be a float number between 0 and 5 with one decimal place. Without any other information or text, format: 3.0" \
+"content": "You should only return the binary score and probability for the following input. The output should be in format: 0,0.75 or 1,0.85 without any other information or text." \
 ,
 "role": "user", 
 "content": "Score according to the criteria above and the audio given to you"
@@ -139,9 +186,9 @@ class BaseDataset(Dataset):
         dataset_subset=None,
     ):
         self.data = (
-            load_dataset(dataset_name, dataset_subset, split=split,revision="d6dc7c69f435059c9718e92aa2b4f93211879084")
+            load_dataset(dataset_name, dataset_subset, split=split)
             if dataset_subset
-            else load_dataset(dataset_name, split=split,revision="d6dc7c69f435059c9718e92aa2b4f93211879084")
+            else load_dataset(dataset_name, split=split)
         )
         if max_samples is not None:
             self.data = self.data.select(range(max_samples))
@@ -169,9 +216,15 @@ class EvalDataset(BaseDataset):
           - '{text_column}': the answer score of the audio
         """
         data = self.data[idx]
+        #print(data) column names
+        # print(self.data.column_names)
+        # Get the actual question from the data
+        question = data.get(self.question_column, "") if QA else ""
+        
+        # Place question before audio token to be consistent with FinetuneDataset
         user_message = {
             "role": "user",
-            "content": self.instruction + "<|audio_1|>" + self.question_column if QA else self.instruction + "<|audio_1|> ",
+            "content": self.instruction + question + "<|audio_1|>",
         }
         prompt = self.processor.tokenizer.apply_chat_template(
             [user_message], tokenize=False, add_generation_prompt=True
@@ -186,7 +239,15 @@ class EvalDataset(BaseDataset):
             ],
             return_tensors="pt",
         )
-        answer = f"{data[self.text_column]}{ANSWER_SUFFIX}"
+        
+        # Convert original score to binary probability format
+        original_score = data[self.text_column]
+        binary_label, probability = convert_to_binary_prob(original_score)
+        
+        # Format the answer as "binary_label,probability"
+        binary_answer = f"{binary_label},{probability:.2f}"
+        
+        answer = f"{binary_answer}{ANSWER_SUFFIX}"
         answer_ids = self.processor.tokenizer(answer, return_tensors="pt").input_ids
         input_ids = inputs.input_ids
         labels = answer_ids
@@ -197,7 +258,6 @@ class EvalDataset(BaseDataset):
             "input_audio_embeds": inputs.input_audio_embeds,
             "audio_embed_sizes": inputs.audio_embed_sizes,
         }
-
 
 
 class FinetuneDataset(BaseDataset):
@@ -237,10 +297,14 @@ class FinetuneDataset(BaseDataset):
         print(f"Loaded dataset '{dataset_name}' with {len(self.data)} samples.")
 
         # Ensure required columns exist
-        required_columns = [self.text_column, self.audio_column, self.question_column]
+        required_columns = [self.text_column, self.audio_column]
         for column in required_columns:
             if column not in self.data.column_names:
                 raise ValueError(f"Missing required column '{column}' in the dataset.")
+        
+        # Check if question column exists (it's optional)
+        if self.question_column not in self.data.column_names:
+            print(f"Warning: Question column '{self.question_column}' not found in dataset. Will use empty string for questions.")
 
     def __getitem__(self, idx):
         """
@@ -253,10 +317,14 @@ class FinetuneDataset(BaseDataset):
         # Debugging: Print the raw data sample
         de_print(f"Processing sample {idx}: {data}")
 
-        # change the order of the prompt QA before audio to prevent the model from answering the question before listening to the audio rather than giving the score
+        # Get the actual question from the data
+        question = data.get(self.question_column, "") if QA else ""
+        
+        # Change the order of the prompt: QA before audio to prevent the model 
+        # from answering the question rather than giving the score
         user_message = {
             "role": "user",
-            "content": self.instruction + self.question_column + "<|audio_1|>"  if QA else self.instruction + "<|audio_1|> ",
+            "content": self.instruction + question + "<|audio_1|>",
         }
         prompt = self.processor.tokenizer.apply_chat_template(
             [user_message], tokenize=False, add_generation_prompt=True
@@ -271,7 +339,15 @@ class FinetuneDataset(BaseDataset):
             ],
             return_tensors="pt",
         )
-        answer = f"{data[self.text_column]}{ANSWER_SUFFIX}"
+        
+        # Convert original score to binary probability format
+        original_score = data[self.text_column]
+        binary_label, probability = convert_to_binary_prob(original_score)
+        
+        # Format the answer as "binary_label,probability"
+        binary_answer = f"{binary_label},{probability:.2f}"
+        
+        answer = f"{binary_answer}{ANSWER_SUFFIX}"
         answer_ids = self.processor.tokenizer(answer, return_tensors="pt").input_ids
 
         if self.training:
@@ -411,6 +487,10 @@ def evaluate(
 ):
     """
     Evaluate the model on the dataset and calculate accuracy.
+    
+    Note: This function automatically cleans prediction outputs to extract just the
+    binary classification and probability values in the format "X,Y" (e.g., "1,0.95"),
+    removing any trailing newlines or descriptive text.
     """
     rank = int(os.environ.get("RANK", 0))
     local_rank = int(os.environ.get("LOCAL_RANK", 0))
@@ -510,54 +590,106 @@ def evaluate(
             results["accuracy"] = accuracy
             print(f"Accuracy: {accuracy:.4f}")
             
-            # calculate absolute accuracy
-            absolute_acc = 0
-            for i in range(len(all_labels)):
-                try:
-                    tmp = all_generated_texts[i].split(" ")[0]
-                    tmp = tmp.strip('"\',\\/')
-                    gen_score = float(tmp)
-                    label_score = float(all_labels[i].split(" ")[0])
-                    
-                    # Round scores based on the provided rule
-                    gen_rounded = round_score(gen_score)
-                    label_rounded = round_score(label_score)
-                    
-                    if gen_rounded == label_rounded:
-                        absolute_acc += 1
-                except Exception as e:
-                    print(f"Error calculating absolute accuracy for sample {i}: {e}")
-            
-            absolute_acc = absolute_acc / len(all_labels)
-            results["absolute_accuracy"] = absolute_acc
-            print(f"Absolute Accuracy: {absolute_acc:.4f}")
+            # We don't need absolute accuracy for binary classification
+            # This is only relevant for traditional classification with scores 1-5
+            # So removing this calculation
 
         if metric.lower() == "binary" or metric.lower() == "both":
-            correct = 0
-            # calculate accuracy by comparing the generated text with the labels
+            binary_correct = 0
+            binary_preds = []
+            binary_refs = []
+            prob_preds = []
+            prob_refs = []
+            
+            # Calculate accuracy by comparing the generated text with the labels
             for i in range(len(all_labels)):
                 try:
-                    tmp = all_generated_texts[i].split(" ")[0]
-                    tmp = tmp.strip('"\',\\/')
-                    gen_score = float(tmp)
-                    label_score = float(all_labels[i].split(" ")[0])
+                    # Parse the prediction - format is "binary_label,probability"
+                    pred = all_generated_texts[i].strip()
+                    ref = all_labels[i].strip()
                     
-                    # Round scores based on the provided rule
-                    gen_rounded = round_score(gen_score)
-                    label_rounded = round_score(label_score)
+                    # Handle the binary format with probability (binary_label,probability)
+                    if "," in pred:
+                        # Clean the prediction - extract just the "X,Y" part using regex
+                        match = re.match(r"(\d+,\d+\.\d+)", pred)
+                        if match:
+                            pred = match.group(1)
+                        
+                        # Parse the cleaned prediction
+                        pred_parts = pred.split(",", 1)
+                        binary_pred = int(pred_parts[0].strip())
+                        prob_pred = float(pred_parts[1].strip())
+                    else:
+                        # Try to handle as legacy format (float score)
+                        try:
+                            tmp = pred.split(" ")[0]
+                            tmp = tmp.strip('"\',\\/')
+                            score = float(tmp)
+                            binary_pred = 1 if score >= 4.0 else 0
+                            prob_pred = 0.75 if binary_pred == 1 else 0.25
+                            print(f"Warning: Prediction '{pred}' not in binary,probability format. Converted to {binary_pred},{prob_pred}")
+                        except:
+                            print(f"Error parsing prediction: '{pred}'")
+                            continue
                     
-                    # Convert to binary pass/fail
-                    gen_binary = 1 if gen_rounded > 3 else 0
-                    label_binary = 1 if label_rounded > 3 else 0
+                    # Parse the reference in the same way
+                    if "," in ref:
+                        # New format: "1,0.85" or "0,0.75"
+                        ref_parts = ref.split(",", 1)
+                        binary_ref = int(ref_parts[0].strip())
+                        prob_ref = float(ref_parts[1].strip())
+                    else:
+                        # Try to handle as legacy format (float score)
+                        try:
+                            tmp = ref.split(" ")[0]
+                            tmp = tmp.strip('"\',\\/')
+                            score = float(tmp)
+                            binary_ref = 1 if score >= 4.0 else 0
+                            prob_ref = 0.75 if binary_ref == 1 else 0.25
+                            print(f"Warning: Reference '{ref}' not in binary,probability format. Converted to {binary_ref},{prob_ref}")
+                        except:
+                            print(f"Error parsing reference: '{ref}'")
+                            continue
                     
-                    if gen_binary == label_binary:
-                        correct += 1
+                    # Store for metrics calculation
+                    binary_preds.append(binary_pred)
+                    binary_refs.append(binary_ref)
+                    prob_preds.append(prob_pred)
+                    prob_refs.append(prob_ref)
+                    
+                    # Binary accuracy
+                    if binary_pred == binary_ref:
+                        binary_correct += 1
+                        
                 except Exception as e:
                     print(f"Error calculating binary accuracy for sample {i}: {e}")
+            
+            # Binary Accuracy
+            if binary_preds:  # Check if we have valid predictions
+                binary_acc = binary_correct / len(binary_preds)
+                results["binary_accuracy"] = binary_acc
+                print(f"Binary Accuracy: {binary_acc:.4f}")
+                
+                # Probability MSE (Mean Squared Error)
+                if prob_preds:
+                    prob_mse = sum((p - r) ** 2 for p, r in zip(prob_preds, prob_refs)) / len(prob_preds)
+                    results["probability_mse"] = prob_mse
+                    print(f"Probability MSE: {prob_mse:.4f}")
                     
-            binary_acc = correct / len(all_labels)
-            results["binary_accuracy"] = binary_acc
-            print(f"Binary Accuracy: {binary_acc:.4f}")
+                    # Probability accuracy within tolerance
+                    tolerance = 0.1
+                    prob_correct = sum(1 for p, r in zip(prob_preds, prob_refs) if abs(p - r) <= tolerance)
+                    prob_acc = prob_correct / len(prob_preds)
+                    results["probability_accuracy"] = prob_acc
+                    print(f"Probability Accuracy (±{tolerance}): {prob_acc:.4f}")
+                    
+                    # Combined score (weighted average of binary_accuracy and prob_accuracy)
+                    combined_score = 0.7 * binary_acc + 0.3 * prob_acc
+                    results["combined_score"] = combined_score
+                    print(f"Combined Score: {combined_score:.4f}")
+            else:
+                print("No valid binary predictions found.")
+                results["binary_accuracy"] = 0
 
         results["num_samples"] = len(all_labels)
         print(f"Number of samples: {len(all_labels)}")
@@ -575,6 +707,12 @@ def evaluate(
                     save_dict["accuracy"] = results["accuracy"]
                 if "binary_accuracy" in results:
                     save_dict["binary_accuracy"] = results["binary_accuracy"]
+                if "probability_mse" in results:
+                    save_dict["probability_mse"] = results["probability_mse"]
+                if "probability_accuracy" in results:
+                    save_dict["probability_accuracy"] = results["probability_accuracy"]
+                if "combined_score" in results:
+                    save_dict["combined_score"] = results["combined_score"]
                 json.dump(save_dict, f, indent=4, ensure_ascii=False)
 
     return results
@@ -585,27 +723,19 @@ def scoring_audio(model, processor, audio_path, question):
 
     # Load and preprocess audio
     try:
-        # Check if we need to load audio from a path
-        if isinstance(audio_path, str):
-            print(f"Loading audio from path: {audio_path}")
-            audio, sr = librosa.load(audio_path, sr=16000)
-        elif isinstance(audio_path, dict):
-            if "array" in audio_path and "sampling_rate" in audio_path:
-                audio, sr = audio_path["array"], audio_path["sampling_rate"]
-            else:
-                # Try to find a path in the dict
-                path = audio_path.get("path", audio_path)
-                print(f"Loading audio from path in dict: {path}")
-                audio, sr = librosa.load(path, sr=16000)
-        else:
-            raise ValueError(f"Unsupported audio input type: {type(audio_path)}")
+        audio, sr = audio_path["array"], audio_path["sampling_rate"]
     except Exception as e:
-        raise ValueError(f"Error loading audio file {audio_path}: {e}")
+        # Try to load from file path
+        try:
+            import librosa
+            audio, sr = librosa.load(audio_path, sr=16000)
+        except:
+            raise ValueError(f"Error loading audio file {audio_path}: {e}")
 
     # Prepare input for the model
     user_message = {
         "role": "user",
-        "content": InstructionText + "<|audio_1|> " + question,
+        "content": InstructionText + (question if question else "") + "<|audio_1|>",
     }
     prompt = processor.tokenizer.apply_chat_template(
         [user_message], tokenize=False, add_generation_prompt=True
@@ -643,14 +773,40 @@ def scoring_audio(model, processor, audio_path, question):
         )
 
     # Decode the generated text
-    transcription = processor.decode(
+    result = processor.decode(
         generated_ids[0, inputs["input_ids"].shape[1]:],
         skip_special_tokens=True,
         clean_up_tokenization_spaces=False,
     )
 
-    # Clean up the transcription (remove any potential end tokens that weren't caught by the stopping criteria)
+    # Clean up the result (remove any potential end tokens that weren't caught by the stopping criteria)
     for token in stop_tokens:
-        transcription = transcription.replace(token, "")
-
-    return transcription.strip()
+        result = result.replace(token, "")
+    
+    # Parse the binary output
+    result = result.strip()
+    try:
+        if "," in result:
+            # Clean the result - extract just the "X,Y" part using regex
+            match = re.match(r"(\d+,\d+\.\d+)", result)
+            if match:
+                result = match.group(1)
+                
+            # Format is "binary_label,probability"
+            binary_label, probability = result.split(",", 1)
+            binary_label = int(binary_label.strip())
+            probability = float(probability.strip())
+            
+            # Format for return
+            formatted_result = f"{binary_label},{probability:.2f}"
+        else:
+            # Try to interpret as a legacy score
+            score = float(result)
+            binary_label = 1 if score >= 4.0 else 0
+            probability = 0.75 if binary_label == 1 else 0.25
+            formatted_result = f"{binary_label},{probability:.2f}"
+    except:
+        # If parsing fails, return the raw result
+        formatted_result = result
+        
+    return formatted_result

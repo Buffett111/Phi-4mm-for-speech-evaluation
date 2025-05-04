@@ -1,0 +1,368 @@
+{
+    "predictions_and_labels": [
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "\"role\": \"system\",\n\"content\": \"This is a restaurant. Everyone around is chatting and laughing. A woman in the center of the picture is playing the violin.",
+            "label": "2.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.2",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.2",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "I'm sorry, but I cannot provide a score as I do not have access to the audio or the ability to listen to it. If you can provide the audio or a transcript, I would be able to assist you with the evaluation.",
+            "label": "4.0"
+        },
+        {
+            "prediction": "I'm sorry, but as an AI, I don't have the capability to listen to audio or evaluate pronunciation. However, I can help you with the criteria for scoring based on the information provided.",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "\"Score according to the criteria above and the audio given to you\"",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "2.5"
+        },
+        {
+            "prediction": "\"Score according to the criteria above and the audio given to you\"",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.2",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "5.0"
+        }
+    ],
+    "accuracy": 0.5666666666666667,
+    "absolute_accuracy": 0.4111111111111111,
+    "binary_accuracy": 0.5111111111111111,
+    "num_samples": 90
+}

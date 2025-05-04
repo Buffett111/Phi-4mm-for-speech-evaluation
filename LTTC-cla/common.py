@@ -139,9 +139,9 @@ class BaseDataset(Dataset):
         dataset_subset=None,
     ):
         self.data = (
-            load_dataset(dataset_name, dataset_subset, split=split,revision="d6dc7c69f435059c9718e92aa2b4f93211879084")
+            load_dataset(dataset_name, dataset_subset, split=split)
             if dataset_subset
-            else load_dataset(dataset_name, split=split,revision="d6dc7c69f435059c9718e92aa2b4f93211879084")
+            else load_dataset(dataset_name, split=split)
         )
         if max_samples is not None:
             self.data = self.data.select(range(max_samples))
@@ -197,7 +197,6 @@ class EvalDataset(BaseDataset):
             "input_audio_embeds": inputs.input_audio_embeds,
             "audio_embed_sizes": inputs.audio_embed_sizes,
         }
-
 
 
 class FinetuneDataset(BaseDataset):
@@ -585,20 +584,7 @@ def scoring_audio(model, processor, audio_path, question):
 
     # Load and preprocess audio
     try:
-        # Check if we need to load audio from a path
-        if isinstance(audio_path, str):
-            print(f"Loading audio from path: {audio_path}")
-            audio, sr = librosa.load(audio_path, sr=16000)
-        elif isinstance(audio_path, dict):
-            if "array" in audio_path and "sampling_rate" in audio_path:
-                audio, sr = audio_path["array"], audio_path["sampling_rate"]
-            else:
-                # Try to find a path in the dict
-                path = audio_path.get("path", audio_path)
-                print(f"Loading audio from path in dict: {path}")
-                audio, sr = librosa.load(path, sr=16000)
-        else:
-            raise ValueError(f"Unsupported audio input type: {type(audio_path)}")
+        audio, sr = audio_path["array"], audio_path["sampling_rate"]
     except Exception as e:
         raise ValueError(f"Error loading audio file {audio_path}: {e}")
 

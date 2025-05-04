@@ -7,8 +7,8 @@ form_id='1964'
 #module_type="phi-4-multimodal-instruct"
 #module_type="phi-4-multimodal-instruct-lttc"
 #module_type="Phi-4-multimodal-instruct_QA_NoImage_0325"
-module_type="Phi-4-multimodal-instruct_QA_NoImage_0325_1964" #(SOTA)
-exp_dir="./LTTC-Intermediate/(SOTA)Phi-4-mm_QA_NoImage_${date}_${form_id}/IS-${form_id}"
+module_type="phi-4-mm-lttc-sla-exp-01" 
+exp_dir="./LTTC-Intermediate/phi-4-mm-lttc-sla-exp-01"
 
 # watch -n 1 nvidia-smi
 # --model_name_or_path "ntnu-smil/${module_type}" \
@@ -20,6 +20,6 @@ python3 eval.py \
     --metric "both" \
     --dataset_name "ntnu-smil/Unseen_1964" \
     --audio_column "wav_file" \
-    --split "test" \
+    --split "fulltest" \
 
 # --dataset_name "ntnu-smil/LTTC-Dev-${form_id}-0520" \

@@ -1,0 +1,1208 @@
+{
+    "predictions_and_labels": [
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "5.0",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "2.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "2.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "2.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "2.5",
+            "label": "2.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "2.5",
+            "label": "2.5"
+        },
+        {
+            "prediction": "2.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.5",
+            "label": "5.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.5",
+            "label": "3.5"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "3.5"
+        },
+        {
+            "prediction": "3.5",
+            "label": "4.0"
+        },
+        {
+            "prediction": "3.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.0"
+        },
+        {
+            "prediction": "4.0",
+            "label": "4.5"
+        }
+    ],
+    "accuracy": 0.9633333333333334,
+    "absolute_accuracy": 0.8033333333333333,
+    "binary_accuracy": 0.8766666666666667,
+    "num_samples": 300
+}
